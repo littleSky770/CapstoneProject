@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home Page</title>
-</head>
-<body>
-    {{ msg }}
-</body>
+    <head>
+        <title>Safety Analysis Tool</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                box-sizing: border-box;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the top navigation bar */
+            .topnav {
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            /* Style the topnav links */
+            .topnav a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change color on hover */
+            .topnav a:hover {
+                background-color: #d3d3d3;
+                color: black;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+
+            /* Style the footer */
+            .footer {
+                background-color: #ddd;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="#SafetyRelatedData">Safety-related Data</a>
+            <a href="#SafetyAnalysisTool">Safety Analysis Tool</a>
+            <a href="#DetailsOfSystems">Details of the System</a>
+        </div>
+
+        <div class="content">
+            <h2>Home Page</h2>
+            <p>To identify/correct safety issues with autonomous systems (e.g., self-driving cars, drones, etc.) a safety analysis tool has been implemented. There are existing tools that are used to identify these safety issues. Our goal is to implement a helpful and easy-to-use web-based graphical user interface (GUI), which will incorporate the safety analysis tool’s backend. We do this with the intent of giving researchers and engineers ease of access to software that will not only make their work better but also people’s lives safer.</p>
+        </div>
+        <div class="footer">
+            <p>Contact us</p>
+        </div>
+    </body>
 </html>
