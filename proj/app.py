@@ -8,7 +8,6 @@ from flask import * # Install Python and Flask on your local machine
 
 # Create Flask
 app = Flask(__name__)
-
 # Custom key for the Flask app
 app.secret_key = 'this is a key'
 
@@ -47,26 +46,32 @@ app.secret_key = 'this is a key'
 #        cur.execute("UPDATE Users SET unit_num = (?) WHERE email = (?)", (unit_user, user))
 #        con.commit()
 
-
-app = Flask(__name__)
-
+name = 'Guest'
 
 @app.route('/')
 def home():
+    #hardcoded for now
 
     # Check if a user is currently logged in
-#    if session.get('loggedin') == True:
-#        print("logged in = " + str(session['loggedin']) + "    " + str(session['user_email']))
-#        pass
-#    else:
-        # Session variables
-#        session['loggedin'] = False
-#        session['user_email'] = ""
 
+    return render_template('index.html', usr = name)
 
-    #msg = "Hello World!"
-    #return render_template('index.html', user=session['user_email'])
-    return render_template('index.html')
+#Details of Systems page
+@app.route("/DetailsSys/")
+def detailsSys():
+
+    return render_template('detailsSys.html', usr = name)
+
+#login page the POST and GET methods are made clear here because we will be sending data
+@app.route("/login/", methods=["POST", "GET"])
+def login():
+    #later this if will help us with db stuff
+    if request.method == "POST":
+        #u = request.form["nm"]
+        #e = request.form["em"]
+        return render_template('login.html')
+    else:
+        return render_template('login.html')
 
 if __name__ == '__main__':
-    app.run() 
+    app.run(debug=True)
