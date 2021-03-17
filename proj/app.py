@@ -57,7 +57,7 @@ def home():
     return render_template('index.html', usr = name)
 
 #Details of Systems page
-@app.route("/DetailsSys/")
+@app.route("/detailsSys/")
 def detailsSys():
 
     return render_template('detailsSys.html', usr = name)
@@ -67,11 +67,19 @@ def detailsSys():
 def login():
     #later this if will help us with db stuff
     if request.method == "POST":
-        #u = request.form["nm"]
-        #e = request.form["em"]
+        #e = request.form["email"]
+        #p = request.form["pass"]
         return render_template('login.html')
     else:
         return render_template('login.html')
+
+@app.route("/register/", methods=["POST", "GET"])
+def register():
+    #later this if will help us with db stuff
+    if request.method == "POST":
+        return render_template('register.html')
+    else:
+        return render_template('register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
