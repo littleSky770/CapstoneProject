@@ -13,23 +13,23 @@ app.secret_key = 'this is a key'
 
 
 # Create database for user accounts and apartment units and anything else
-#con = sqlite3.connect('data.db', check_same_thread=False, timeout=10000)
+con = sqlite3.connect('data.db', check_same_thread=False, timeout=10000)
 
 
 # Create a users and floorplan table in the database
-#cur = con.cursor()
+cur = con.cursor()
 
-#cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
-#     "id"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-#    "firstname" TEXT NOT NULL,
-#    "lastname" TEXT NOT NULL,
-#    "phone" TEXT NOT NULL,
-#    "email"    TEXT NOT NULL,
-#    "password"    TEXT NOT NULL
-#);
-#''')
+cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
+     "id"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "firstname" TEXT NOT NULL,
+    "lastname" TEXT NOT NULL,
+    "phone" TEXT NOT NULL,
+    "email"    TEXT NOT NULL,
+    "password"    TEXT NOT NULL
+);
+''')
 
-#con.commit()
+con.commit()
 
 #SQL Funtions
 #def AddUser(firstname_form, lastname_form, phone_form, email_form, password_form):
