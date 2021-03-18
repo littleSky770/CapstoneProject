@@ -10,6 +10,7 @@ import hashlib
 app = Flask(__name__)
 # Custom key for the Flask app
 app.secret_key = 'this is a key'
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 # Create database for user accounts and anything else
@@ -67,8 +68,12 @@ def detailsSys():
 def login():
     #later this if will help us with db stuff
     if request.method == "POST":
-        #e = request.form["email"]
-        #p = request.form["pass"]
+        session.permanent = True
+        e = request.form["email"]
+        p = request.form["pass"]
+        session["email"] = e
+        session["pass"] = p
+
         return render_template('login.html')
     else:
         return render_template('login.html')
