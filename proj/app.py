@@ -2,8 +2,8 @@
 # Then visit localhost:5000 in a web browser
 
 from flask import * # Install Python and Flask on your local machine
-#import sqlite3
-#import hashlib
+import sqlite3
+import hashlib
 
 
 # Create Flask
@@ -12,11 +12,11 @@ app = Flask(__name__)
 app.secret_key = 'this is a key'
 
 
-# Create database for user accounts and apartment units and anything else
+# Create database for user accounts and anything else
 con = sqlite3.connect('data.db', check_same_thread=False, timeout=10000)
 
 
-# Create a users and floorplan table in the database
+# Create a users table in the database
 cur = con.cursor()
 
 cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
