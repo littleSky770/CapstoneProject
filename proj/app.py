@@ -10,7 +10,7 @@ import hashlib
 app = Flask(__name__)
 # Custom key for the Flask app
 app.secret_key = 'this is a key'
-app.permanent_session_lifetime = timedelta(minutes=5)
+#app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 # Create database for user accounts and anything else
@@ -47,12 +47,11 @@ con.commit()
 #        cur.execute("UPDATE Users SET unit_num = (?) WHERE email = (?)", (unit_user, user))
 #        con.commit()
 
+    #hardcoded for now
 name = 'Guest'
 
 @app.route('/')
 def home():
-    #hardcoded for now
-
     # Check if a user is currently logged in
 
     return render_template('index.html', usr = name)
@@ -85,6 +84,11 @@ def register():
         return render_template('register.html')
     else:
         return render_template('register.html')
+
+@app.route("/safetyRelatedData/")
+def safetyRelatedData():
+
+    return render_template('safetyRelatedData.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

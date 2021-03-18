@@ -134,6 +134,25 @@
               box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
                           inset 2px 2px 3px rgba(0, 0, 0, .6);
             }
+            .regular{
+              border: 0;
+              line-height: 3;
+              padding: 0 15px;
+              text-align: center;
+              color: white;
+              text-shadow: 1px 1px 1px #000;
+              border-radius: 10px;
+              background-color: lightgrey;
+              box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                          inset -2px -2px 3px rgba(0, 0, 0, .6);
+            }
+            .regular:hover{
+              background-color: grey;
+            }
+            .regular:active{
+              box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                          inset 2px 2px 3px rgba(0, 0, 0, .6);
+            }
 
             /* Style the footer */
             .footer {
@@ -145,7 +164,7 @@
     <body>
         <div class="topnav">
           {% block user %}{% endblock %}
-          <a href="#SafetyRelatedData">Safety-related Data</a>
+          <a href="/safetyRelatedData">Safety-related Data</a>
           <a href="#SafetyAnalysisTool">Safety Analysis Tool</a>
           <a href="/detailsSys">Details of the System</a>
           <a href="/">Home</a>
