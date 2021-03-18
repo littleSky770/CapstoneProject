@@ -142,7 +142,10 @@ def loadFromDB():
 
     return render_template('loadFromDB.html', usr = name)
 
-
+@app.route("/contact/")
+def contact():
+    
+    return render_template('contact.html')
 ############################################ End ########################################################
 
 if __name__ == '__main__':
