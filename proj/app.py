@@ -47,7 +47,8 @@ con.commit()
 #        cur.execute("UPDATE Users SET unit_num = (?) WHERE email = (?)", (unit_user, user))
 #        con.commit()
 
-    #hardcoded for now
+#hardcoded for now
+#name will be stored by the session and passed to the pages
 name = 'Guest'
 
 @app.route('/')
@@ -55,12 +56,6 @@ def home():
     # Check if a user is currently logged in
 
     return render_template('index.html', usr = name)
-
-#Details of Systems page
-@app.route("/detailsSys/")
-def detailsSys():
-
-    return render_template('detailsSys.html', usr = name)
 
 #login page the POST and GET methods are made clear here because we will be sending data
 @app.route("/login/", methods=["POST", "GET"])
@@ -85,10 +80,41 @@ def register():
     else:
         return render_template('register.html')
 
+#Details of Systems main page
+@app.route("/detailsSys/")
+def detailsSys():
+
+    return render_template('detailsSys.html', usr = name)
+
+#Safety Related Data main page
 @app.route("/safetyRelatedData/")
 def safetyRelatedData():
 
-    return render_template('safetyRelatedData.html')
+    return render_template('safetyRelatedData.html', usr = name)
+
+#Safety Related Data/ Add Data to Table page
+@app.route("/safetyRelatedData/addDataToTable/")
+def addDataToTable():
+
+    return render_template('addDataToTable.html', usr = name)
+
+#Safety Related Data/ Change Access Permissions page
+@app.route("/safetyRelatedData/changeAccessPerms/")
+def changeAccessPerms():
+
+    return render_template('changeAccessPerms.html', usr = name)
+
+#Safety Related Data/ Save Details to The Database page
+@app.route("/safetyRelatedData/saveDetailsToDB/")
+def saveDetailsToDB():
+
+    return render_template('saveDetailsToDB.html', usr = name)
+
+#Safety Analysis Tool main page
+@app.route("/safetyAnalysisTool/")
+def safetyAnalysisTool():
+
+    return render_template('safetyAnalysisTool.html', usr = name)
 
 if __name__ == '__main__':
     app.run(debug=True)

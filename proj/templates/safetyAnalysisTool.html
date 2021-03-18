@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block user %}<a href="/login">{{usr}}</a>{% endblock %}
+{% block pageTitle %}Safety Analysis Tool{% endblock %}
+{% block content %}
+<p>Select the method for entering your data:</p>
+<p>
+  <button class="regular" type="button">Upload Existing Table</button>
+  <button class="regular" type="button">Add a New System</button>
+  <button class="regular" type="button">Load from Database</button>
+</p>
+{% endblock %}
