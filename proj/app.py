@@ -73,6 +73,14 @@ def login():
         session["email"] = e
         session["pass"] = p
 
+        with con:
+            cur = con.cursor()
+            p2 = cur.execute("SELECT " + password + "FROM Users where " + email + "=?", (e,)).fetchall()
+            con.close()
+
+            if p2 == p
+                print("Successful login")
+
         return render_template('login.html')
     else:
         return render_template('login.html')
@@ -144,7 +152,7 @@ def loadFromDB():
 
 @app.route("/contact/")
 def contact():
-    
+
     return render_template('contact.html')
 ############################################ End ########################################################
 
