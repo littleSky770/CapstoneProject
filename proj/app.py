@@ -78,7 +78,7 @@ def login():
             p2 = cur.execute("SELECT " + password + "FROM Users where " + email + "=?", (e,)).fetchall()
             con.close()
 
-            if p2 == p
+            if p2 == p:
                 print("Successful login")
 
         return render_template('login.html')
