@@ -2,6 +2,7 @@
 # Then visit localhost:5000 in a web browser
 
 from flask import * # Install Python and Flask on your local machine
+from datetime import timedelta
 import sqlite3
 import hashlib
 
@@ -225,6 +226,9 @@ def contact():
 ########################################### Logout ######################################################
 @app.route("/logout/")
 def logout():
+    if "user" in session:
+        user = session["user"]
+        flash("Logout Successful", "info")
     session.pop("user", None)
     return redirect(url_for('loginDemo'))
 ############################################ End ########################################################
