@@ -52,14 +52,28 @@ con.commit()
 ########################################## Home ########################################################
 #hardcoded for now
 #name will be stored by the session and passed to the pages
+
 name = 'Guest'
 
-@app.route('/')
+
+
+@app.route('/home')
 def home():
-    # Check if a user is currently logged in
+    return render_template('index.html', usr=name)
 
-    return render_template('index.html', usr = name)
-
+@app.route('/', methods =["GET", "POST"])
+def loginDemo():
+    ##EMAIL  =  user@gmail.com
+    ##PASSWORD = 1234
+    if request.method == "POST":
+        email = request.form["email"]
+        passwrd = request.form["password"]
+        if request.form["signin-btn"] == "access" and email == "user@gmail.com" and passwrd == "1234":
+            return render_template("index.html")
+        else:
+            return render_template("signin.html")
+                
+    return render_template("signin.html")
 
 ######################################## Login and Resister ###########################################
 #login page the POST and GET methods are made clear here because we will be sending data
