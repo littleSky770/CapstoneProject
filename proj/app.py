@@ -9,7 +9,7 @@ import hashlib
 # Create Flask
 app = Flask(__name__)
 # Custom key for the Flask app
-app.secret_key = 'this is a key'
+app.secret_key = "this is a key"
 #app.permanent_session_lifetime = timedelta(minutes=5)
 
 
@@ -49,18 +49,11 @@ con.commit()
 #        cur.execute("UPDATE Users SET unit_num = (?) WHERE email = (?)", (unit_user, user))
 #        con.commit()
 
-########################################## Home ########################################################
 #hardcoded for now
 #name will be stored by the session and passed to the pages
+guest = 'Guest'
 
-name = 'Guest'
-
-
-
-@app.route('/home')
-def home():
-    return render_template('index.html', usr=name)
-
+######################################## Login and Resister ###########################################
 @app.route('/', methods =["GET", "POST"])
 def loginDemo():
     ##EMAIL  =  user@gmail.com
@@ -69,105 +62,171 @@ def loginDemo():
         email = request.form["email"]
         passwrd = request.form["password"]
         if request.form["signin-btn"] == "access" and email == "user@gmail.com" and passwrd == "1234":
-            return render_template("index.html")
-        else:
-            return render_template("signin.html")
-                
-    return render_template("signin.html")
+            #this is email for now but will be the user's name once the database is up and working
+            session["user"] = email
+            return redirect(url_for("home"))
 
-######################################## Login and Resister ###########################################
+    else:
+        if "user" in session:
+            user = session["user"]
+            return redirect(url_for("userInfo"))
+
+    return render_template('signin.html')
+
 #login page the POST and GET methods are made clear here because we will be sending data
-@app.route("/login/", methods=["POST", "GET"])
-def login():
+#@app.route("/login/", methods=["POST", "GET"])
+#def login():
     #later this if will help us with db stuff
-    if request.method == "POST":
-        session.permanent = True
-        e = request.form["email"]
-        p = request.form["pass"]
-        session["email"] = e
-        session["pass"] = p
+#    if request.method == "POST":
+#        session.permanent = True
+#        e = request.form["email"]
+#        p = request.form["pass"]
+#        session["email"] = e
+#        session["pass"] = p
+#
+#        with con:
+#            cur = con.cursor()
+#            p2 = cur.execute("SELECT " + password + "FROM Users where " + email + "=?", (e,)).fetchall()
+#            con.close()
+#
+#            if p2 == p:
+#                print("Successful login")
+#
+#        return render_template('login.html')
+#    else:
+#        return render_template('login.html')
+#
+#@app.route("/register/", methods=["POST", "GET"])
+#def register():
+#    #later this if will help us with db stuff
+#    if request.method == "POST":
+#        return render_template('register.html')
+#    else:
+#        return render_template('register.html')
 
-        with con:
-            cur = con.cursor()
-            p2 = cur.execute("SELECT " + password + "FROM Users where " + email + "=?", (e,)).fetchall()
-            con.close()
 
-            if p2 == p:
-                print("Successful login")
 
-        return render_template('login.html')
+########################################## Home ########################################################
+
+@app.route("/home/")
+def home():
+    if "user" in session:
+        user = session["user"]
+        return render_template('index.html', usr = user)
+
     else:
-        return render_template('login.html')
+        return render_template('index.html', usr = guest)
 
-@app.route("/register/", methods=["POST", "GET"])
-def register():
-    #later this if will help us with db stuff
-    if request.method == "POST":
-        return render_template('register.html')
+########################################## User Info ########################################################
+@app.route("/userInfo/")
+def userInfo():
+    if "user" in session:
+        user = session["user"]
+        return render_template('userInfo.html', usr = user)
     else:
-        return render_template('register.html')
-
+        return redirect(url_for('loginDemo'))
 
 ######################################## Details of Systems ##############################################
 #Details of Systems main page
 @app.route("/detailsSys/")
 def detailsSys():
+    if "user" in session:
+        user = session["user"]
+        return render_template('detailsSys.html', usr = user)
 
-    return render_template('detailsSys.html', usr = name)
+    else:
+        return render_template('detailsSys.html', usr = guest)
 
 
 ######################################## Safety Related Data #############################################
 #Safety Related Data main page
 @app.route("/safetyRelatedData/")
 def safetyRelatedData():
+    if "user" in session:
+        user = session["user"]
+        return render_template('safetyRelatedData.html', usr = user)
 
-    return render_template('safetyRelatedData.html', usr = name)
+    else:
+        return render_template('safetyRelatedData.html', usr = guest)
 
 #Safety Related Data/ Add Data to Table page
 @app.route("/safetyRelatedData/addDataToTable/")
 def addDataToTable():
+    if "user" in session:
+        user = session["user"]
+        return render_template('addDataToTable.html', usr = user)
 
-    return render_template('addDataToTable.html', usr = name)
+    else:
+        return render_template('addDataToTable.html', usr = guest)
 
 #Safety Related Data/ Change Access Permissions page
 @app.route("/safetyRelatedData/changeAccessPerms/")
 def changeAccessPerms():
+    if "user" in session:
+        user = session["user"]
+        return render_template('changeAccessPerms.html', usr = user)
 
-    return render_template('changeAccessPerms.html', usr = name)
+    else:
+        return render_template('changeAccessPerms.html', usr = guest)
 
 #Safety Related Data/ Save Details to The Database page
 @app.route("/safetyRelatedData/saveDetailsToDB/")
 def saveDetailsToDB():
+    if "user" in session:
+        user = session["user"]
+        return render_template('saveDetailsToDB.html', usr = user)
 
-    return render_template('saveDetailsToDB.html', usr = name)
+    else:
+        return render_template('saveDetailsToDB.html', usr = guest)
 
 
 ######################################## Safety Analysis Tool ############################################
 #Safety Analysis Tool main page
 @app.route("/safetyAnalysisTool/")
 def safetyAnalysisTool():
+    if "user" in session:
+        user = session["user"]
+        return render_template('safetyAnalysisTool.html', usr = user)
 
-    return render_template('safetyAnalysisTool.html', usr = name)
+    else:
+        return render_template('safetyAnalysisTool.html', usr = guest)
 
 @app.route("/safetyAnalysisTool/uploadExistingSys/")
 def uploadExistingSys():
+    if "user" in session:
+        user = session["user"]
+        return render_template('uploadExistingSys.html', usr = user)
 
-    return render_template('uploadExistingSys.html', usr = name)
+    else:
+        return render_template('uploadExistingSys.html', usr = guest)
 
 @app.route("/safetyAnalysisTool/addNewSys/")
 def addNewSys():
+    if "user" in session:
+        user = session["user"]
+        return render_template('addNewSys.html', usr = user)
 
-    return render_template('addNewSys.html', usr = name)
+    else:
+        return render_template('addNewSys.html', usr = guest)
 
 @app.route("/safetyAnalysisTool/loadFromDB/")
 def loadFromDB():
+    if "user" in session:
+        user = session["user"]
+        return render_template('loadFromDB.html', usr = user)
 
-    return render_template('loadFromDB.html', usr = name)
+    else:
+        return render_template('loadFromDB.html', usr = guest)
 
 @app.route("/contact/")
 def contact():
-
     return render_template('contact.html')
+
+########################################### Logout ######################################################
+@app.route("/logout/")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for('loginDemo'))
 ############################################ End ########################################################
 
 if __name__ == '__main__':
