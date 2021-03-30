@@ -15,10 +15,8 @@ app.secret_key = "this is a key"
 
 
 #################################### Database Functions ################################################
-
 # Create database for user accounts and anything else
 con = sqlite3.connect('data.db', check_same_thread=False, timeout=10000)
-
 
 # Create a users table in the database
 cur = con.cursor()
@@ -27,7 +25,6 @@ cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
      "id"    INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
     "email"    TEXT NOT NULL,
     "password"    TEXT NOT NULL
 );
@@ -36,19 +33,13 @@ cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
 con.commit()
 
 #SQL Funtions
-#def AddUser(firstname_form, lastname_form, phone_form, email_form, password_form):
+#def AddUser(firstname_form, lastname_form, email_form, password_form):
 #    with con:
-#        cur.execute("INSERT INTO Users (firstname, lastname, phone, email, password) VALUES (?, ?, ?, ?, ?)", (firstname_form, lastname_form, phone_form, email_form, password_form ))
+#        cur.execute("INSERT INTO Users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)", (firstname_form, lastname_form, email_form, password_form ))
 
 #def DeleteUser(email_form):
 #    with con:
 #        cur.execute("DELETE FROM Users WHERE EMAIL = (?)", (email_form))
-
-#def update(user, unit_user, unit_fp):
-#    with con:
-#        cur.execute("UPDATE FloorPlan SET currentUser = (?) WHERE unit_num = (?)", (user, unit_fp))
-#        cur.execute("UPDATE Users SET unit_num = (?) WHERE email = (?)", (unit_user, user))
-#        con.commit()
 
 #hardcoded for now
 #name will be stored by the session and passed to the pages
@@ -67,7 +58,6 @@ def loginDemo():
             #this is email for now but will be the user's name once the database is up and working
             session["user"] = email
             return redirect(url_for("home"))
-
     else:
         if "user" in session:
             user = session["user"]

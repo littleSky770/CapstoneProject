@@ -136,10 +136,10 @@
             <button type="button" class="top-button" onclick="signUp()">Sign Up</button>
         </div>
             <form id = "left" class="signin-form" method="POST" action="">
-            <input type="email" class="input" name="email" placeholder="Email" required>
-            <input type="password" class="input" name="password" placeholder="Password" required>
+            <input type="text" class="input" name="email" placeholder="Email" required>
+            <input type="text" class="input" name="password" placeholder="Password" required>
             <button type="submit" name="signin-btn" class="signin-button" value="access">Sign In</button>
-            <a href="/home"><button type="submit" class="signin-button">Guest</button></a>
+            <a href="/home"><button type="button" class="signin-button">Guest</button></a> 
 
             <div class="social-media">
                 <a href="#" class="fa fa-facebook"></a>
@@ -150,6 +150,7 @@
         <form id = "right"class="signup-form" method="POST" action="/up">
             <input type="text" class="input" name="fname" placeholder="First Name" required>
             <input type="text" class="input" name="lname" placeholder="Last Name" required>
+            <input type="text" class="input" name="DOB" placeholder="Date of Birth" required>
             <input type="email" class="input" name="signup-email" placeholder="Email" required>
             <input type="password" class="input" name="signup-password" placeholder="Password" required>
             <button type="submit" class="signin-button" name="signup-btn" value="access">Sign Up</button>
