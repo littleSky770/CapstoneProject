@@ -55,17 +55,35 @@ con.commit()
 guest = 'Guest'
 
 ######################################## Login and Resister ###########################################
+
 @app.route('/', methods =["GET", "POST"])
 def loginDemo():
     ##EMAIL  =  user@gmail.com
     ##PASSWORD = 1234
     if request.method == "POST":
-        email = request.form["email"]
-        passwrd = request.form["password"]
-        if request.form["signin-btn"] == "access" and email == "user@gmail.com" and passwrd == "1234":
+        email = request.form.get("email")
+        passwrd = request.form.get("password")
+        if request.form.get("signin-btn") == "access" and email == "user@gmail.com" and passwrd == "1234":
             #this is email for now but will be the user's name once the database is up and working
             session["user"] = email
             return redirect(url_for("home"))
+
+    else:
+        if "user" in session:
+            user = session["user"]
+            return redirect(url_for("userInfo"))
+
+    return render_template('signin.html')
+
+@app.route('/up', methods =["GET", "POST"])
+def signupDemo():
+    if request.method == "POST" and request.form.get("signup-btn") == "access":
+        fname = request.form.get("fname")
+        lname = request.form.get("lname")
+        email = request.form.get("signup-email")
+        passwrd = request.form.get("signup-password")
+        session["user"] = fname
+        return redirect(url_for("home"))
 
     else:
         if "user" in session:
@@ -230,7 +248,7 @@ def logout():
         user = session["user"]
         flash("Logout Successful", "info")
     session.pop("user", None)
-    return redirect(url_for('loginDemo'))
+    return redirect(url_for('signupDemo'))
 ############################################ End ########################################################
 
 if __name__ == '__main__':
