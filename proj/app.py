@@ -238,7 +238,7 @@ def logout():
         user = session["user"]
         flash("Logout Successful", "info")
     session.pop("user", None)
-    return redirect(url_for('signupDemo'))
+    return redirect(url_for('loginDemo'))
 ############################################ End ########################################################
 
 if __name__ == '__main__':
