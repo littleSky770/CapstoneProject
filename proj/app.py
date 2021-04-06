@@ -33,9 +33,10 @@ cur.execute(''' CREATE TABLE IF NOT EXISTS Users (
 con.commit()
 
 #SQL Funtions
-#def AddUser(firstname_form, lastname_form, email_form, password_form):
-#    with con:
-#        cur.execute("INSERT INTO Users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)", (firstname_form, lastname_form, email_form, password_form ))
+def AddUser(firstname_form, lastname_form, email_form, password_form):
+    with con:
+        cur.execute("INSERT INTO Users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)", (firstname_form, lastname_form, email_form, password_form ))
+        con.commit()
 
 #def DeleteUser(email_form):
 #    with con:
@@ -73,6 +74,7 @@ def signupDemo():
         email = request.form.get("signup-email")
         passwrd = request.form.get("signup-password")
         session["user"] = fname
+        AddUser(fname, lname, email, passwrd)
         return redirect(url_for("home"))
 
     else:
