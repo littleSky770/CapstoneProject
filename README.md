@@ -3,7 +3,6 @@ For CSE 4901
 
 Contributors:
 
-Alex Daughters
-Duncan Campbell
-Roshan Karki
-Roxann Rivera
+Alex Daughters - LittleSky770
+Duncan Campbell - MrFuzziHead
+Roshan Karki - roshankarki0
