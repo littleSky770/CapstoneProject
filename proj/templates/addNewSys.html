@@ -1,8 +1,72 @@
 {% extends "base.html" %}
-<!--{% block user %}<a href="/login">{{usr}}</a>{% endblock %}-->
+<style>
+  div {
+    background: red;
+    margin: 5px;
+  }
+  table {
+    border: 2px solid black;
+  }
+  td {
+    padding: 10px;
+    border: 1px solid lightgrey;
+  }
+</style>
 {% block pageTitle %}Add New System{% endblock %}
 {% block content %}
 <p>this is one of the places where we need the user to fill in tables with info</p>
-<p> </p>
+<!-- <table id="table1" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th>Component Name</th>
+      <th>State1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="text" id="row-name" name="row-name" placeholder="Enter Component Name"></td>
+      <td><input type="text" id="row-state" name="row-state" placeholder="Enter Component State"></td>
+      <td><input type="text" id="row-property" name="row-property" placeholder="Enter Property"></td>
+      <td><input type="text" id="row-min" name="row-min" placeholder="Enter Acceptable Min"></td>
+      <td><input type="text" id="row-max" name="row-max" placeholder="Enter Acceptable Max"></td>
+    </tr>
+  </tbody>
+</table>
+<p><button onclick="createRows()">+</button>Rows<button onclick="deleteRows()">-</button></p>
+<p>
+<button type="submit">Submit form</button>
+</p>
 <a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
+-->
+<input type="text" id="tb1" />
+<button type="button" onclick='createTable()'>Click Me!</button>
+<table id="table" class="order-table table" name="table1" required>
+</table>
+
+<script>
+  function createTable() {
+    var a = document.getElementById('tb1').value;
+    if (a == "") {
+      alert("Please enter some numeric value");
+    } else {
+      var th = document.querySelectorAll('#table th');//To check whether `TD` is appended in table or not!
+      if (!th.length) {
+        //If not appended, then append TD in table
+        var rows = "<th>Component Name</th><th>State1</th><th>QuantityType</th><th>Amount</th>";
+        var table = document.createElement('table');
+        table.innerHTML = rows;
+        document.getElementById("table").appendChild(table.firstChild);
+      }
+
+      for (var i = 0; i < a; i++) {
+        var elems = '';
+        elems += "<tr><td><input type='text' name='" + "name".concat(i + 1) + "'></td><td><input type='text' name='" + "quantity".concat(i + 1) + "'></td><td><input type='text' name='" + "qtype".concat(i + 1) + "'></td><td id='amt'><input type='text' id='sum' onkeyup='myfunction(this.value);' name='" + "total".concat(i + 1) + "'></td></tr>";
+        var table = document.createElement('table');
+        table.innerHTML = elems;
+        document.getElementById("table").appendChild(table.firstChild);
+      }
+    }
+  }
+</script>
+
 {% endblock %}
