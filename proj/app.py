@@ -55,7 +55,11 @@ def loginDemo():
     if request.method == "POST":
         email = request.form.get("email")
         passwrd = request.form.get("password")
-        if request.form.get("signin-btn") == "access" and email == "user@gmail.com" and passwrd == "1234":
+        with con:
+            cur = con.cursor()
+            pword = cur.execute("SELECT " + password + " FROM Users where " + email + "=?", (e,)).fetchall()
+            con.commit()
+        if request.form.get("signin-btn") == "access" and email == email and passwrd == pword:
             #this is email for now but will be the user's name once the database is up and working
             session["user"] = email
             return redirect(url_for("home"))
