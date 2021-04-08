@@ -120,39 +120,6 @@ def signupDemo():
 
     return render_template('signin.html')
 
-#login page the POST and GET methods are made clear here because we will be sending data
-#@app.route("/login/", methods=["POST", "GET"])
-#def login():
-    #later this if will help us with db stuff
-#    if request.method == "POST":
-#        session.permanent = True
-#        e = request.form["email"]
-#        p = request.form["pass"]
-#        session["email"] = e
-#        session["pass"] = p
-#
-#        with con:
-#            cur = con.cursor()
-#            p2 = cur.execute("SELECT " + password + "FROM Users where " + email + "=?", (e,)).fetchall()
-#            con.close()
-#
-#            if p2 == p:
-#                print("Successful login")
-#
-#        return render_template('login.html')
-#    else:
-#        return render_template('login.html')
-#
-#@app.route("/register/", methods=["POST", "GET"])
-#def register():
-#    #later this if will help us with db stuff
-#    if request.method == "POST":
-#        return render_template('register.html')
-#    else:
-#        return render_template('register.html')
-
-
-
 ########################################## Home ########################################################
 
 @app.route("/home/")

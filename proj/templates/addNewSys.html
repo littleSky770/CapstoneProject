@@ -14,7 +14,6 @@
 </style>
 {% block pageTitle %}Add New System{% endblock %}
 {% block content %}
-<p>this is one of the places where we need the user to fill in tables with info</p>
 <!-- <table id="table1" class="display" style="width:100%">
   <thead>
     <tr>
@@ -32,41 +31,63 @@
     </tr>
   </tbody>
 </table>
-<p><button onclick="createRows()">+</button>Rows<button onclick="deleteRows()">-</button></p>
-<p>
-<button type="submit">Submit form</button>
-</p>
-<a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
 -->
-<input type="text" id="tb1" />
-<button type="button" onclick='createTable()'>Click Me!</button>
+<p>Type in the number of components you wish to enter</p>
+<p>
+  <input type="text" id="tb1" />
+  <button type="button" id="makeTButton" onclick='createTable()'>Make Table</button>
+</p>
+
 <table id="table" class="order-table table" name="table1" required>
 </table>
 
+<p><button onclick="createRows()">+</button> Rows <button onclick="deleteRows()">-</button></p>
+<p><button type="submit">Submit form</button></p>
+<a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
+
 <script>
+  var num = 0;
   function createTable() {
-    var a = document.getElementById('tb1').value;
+    var a;
+    a = document.getElementById('tb1').value;
+    num += a;
     if (a == "") {
       alert("Please enter some numeric value");
     } else {
-      var th = document.querySelectorAll('#table th');//To check whether `TD` is appended in table or not!
-      if (!th.length) {
-        //If not appended, then append TD in table
-        var rows = "<th>Component Name</th><th>State1</th><th>QuantityType</th><th>Amount</th>";
-        var table = document.createElement('table');
-        table.innerHTML = rows;
-        document.getElementById("table").appendChild(table.firstChild);
-      }
-
+      var rows = "<th>Component</th><th>State1</th>";
       for (var i = 0; i < a; i++) {
-        var elems = '';
-        elems += "<tr><td><input type='text' name='" + "name".concat(i + 1) + "'></td><td><input type='text' name='" + "quantity".concat(i + 1) + "'></td><td><input type='text' name='" + "qtype".concat(i + 1) + "'></td><td id='amt'><input type='text' id='sum' onkeyup='myfunction(this.value);' name='" + "total".concat(i + 1) + "'></td></tr>";
-        var table = document.createElement('table');
-        table.innerHTML = elems;
-        document.getElementById("table").appendChild(table.firstChild);
+        rows += "<tr><td><input type='text' name='" + "component".concat(i+1) + "'></td><td><input type='text' name='" + "state1".concat(i+1) + "'></td></tr>";
       }
+      var table = document.createElement('table');
+      table.innerHTML = rows;
+      document.getElementById("table").appendChild(table.firstChild);
     }
   }
+/* NOT working right now because it wont get along with the create table function :(
+  function createRows() {
+    var table = document.getElementById("table");
+    var row = table.insertRow(-1);
+    for (var i = 0; i < num; i++)
+    {
+      var cells = row.insertCell(i);
+      cells += "<tr><td><input type='text' name='" + "component".concat(i+1) + "'></td><td><input type='text' name='" + "state1".concat(i+1) + "'></td></tr>";";
+    }
+    table.innerHTML = cells;
+    document.getElementById("table").appendChild(table.firstChild);
+  }
+*/
+  function deleteRows() {
+    document.getElementById("table").deleteRow(-1);
+  }
+
+  //this makes the create table button disappear after a number is entered
+  var button = document.getElementById('makeTButton')
+  button.addEventListener('click',hideshow,false);
+
+  function hideshow() {
+    document.getElementById('tb1').style.display = 'none';
+    document.getElementById('makeTButton').style.display = 'none';
+}
 </script>
 
 {% endblock %}
