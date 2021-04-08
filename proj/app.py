@@ -90,6 +90,8 @@ def loginDemo():
         elif FindPass(email) == "X_NOTFOUND_X":
             #DO SOMETHING HERE TO UPDATE SITE AND SAY ACCOUNT NOT FOUND
             print("ERROR: User not found")
+        elif FindPass(email) != "X_NOTFOUND_X" and passwrd != FindPass(email):
+            print("ERROR: Incorrect username/password")
     else:
         if "user" in session:
             user = session["user"]
