@@ -52,13 +52,21 @@ def FindName(email_form):
         firstname_form = ''.join(row[0])
     return firstname_form
 
-#def DeleteUser(email_form):
-#    with con:
-#        cur.execute("DELETE FROM Users WHERE EMAIL = (?)", (email_form))
+def DeleteUser(email_form):
+    with con:
+        cur.execute("DELETE FROM Users WHERE email =?", (email_form,))
+        con.commit()
 
 #hardcoded for now
 #name will be stored by the session and passed to the pages
 guest = 'Guest'
+
+#For debugging and admin deletion (temporary). Enable by changing debug_delete to 1 and changing email_to_delete to email to be deleted
+debug_delete = 0
+if debug_delete:
+    email_to_delete = "EMAIL_HERE"
+    DeleteUser(email_to_delete)
+    print(email_to_delete + " removed from SQL database")
 
 ######################################## Login and Resister ###########################################
 
