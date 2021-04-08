@@ -38,6 +38,20 @@ def AddUser(firstname_form, lastname_form, email_form, password_form):
         cur.execute("INSERT INTO Users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)", (firstname_form, lastname_form, email_form, password_form ))
         con.commit()
 
+def FindPass(email_form):
+    with con:
+        row = cur.execute("SELECT password FROM Users WHERE email =?", (email_form,)).fetchall()
+        con.commit()
+        password_form = ''.join(row[0])
+    return password_form
+
+def FindName(email_form):
+    with con:
+        row = cur.execute("SELECT firstname FROM Users WHERE email =?", (email_form,)).fetchall()
+        con.commit()
+        firstname_form = ''.join(row[0])
+    return firstname_form
+
 #def DeleteUser(email_form):
 #    with con:
 #        cur.execute("DELETE FROM Users WHERE EMAIL = (?)", (email_form))
@@ -50,18 +64,12 @@ guest = 'Guest'
 
 @app.route('/', methods =["GET", "POST"])
 def loginDemo():
-    ##EMAIL  =  user@gmail.com
-    ##PASSWORD = 1234
     if request.method == "POST":
         email = request.form.get("email")
         passwrd = request.form.get("password")
-        with con:
-            cur = con.cursor()
-            pword = cur.execute("SELECT " + password + " FROM Users where " + email + "=?", (e,)).fetchall()
-            con.commit()
-        if request.form.get("signin-btn") == "access" and email == email and passwrd == pword:
-            #this is email for now but will be the user's name once the database is up and working
-            session["user"] = email
+        print("Password found is: " + FindPass(email))
+        if request.form.get("signin-btn") == "access" and passwrd == FindPass(email):
+            session["user"] = FindName(email)
             return redirect(url_for("home"))
     else:
         if "user" in session:
