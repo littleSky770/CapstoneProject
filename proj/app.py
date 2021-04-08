@@ -42,14 +42,20 @@ def FindPass(email_form):
     with con:
         row = cur.execute("SELECT password FROM Users WHERE email =?", (email_form,)).fetchall()
         con.commit()
-        password_form = ''.join(row[0])
+        if not row:
+            password_form = "X_NOTFOUND_X"
+        else:
+            password_form = ''.join(row[0])
     return password_form
 
 def FindName(email_form):
     with con:
         row = cur.execute("SELECT firstname FROM Users WHERE email =?", (email_form,)).fetchall()
         con.commit()
-        firstname_form = ''.join(row[0])
+        if not row:
+            firstname_form = "X_NOTFOUND_X"
+        else:
+            firstname_form = ''.join(row[0])
     return firstname_form
 
 def DeleteUser(email_form):
@@ -62,11 +68,14 @@ def DeleteUser(email_form):
 guest = 'Guest'
 
 #For debugging and admin deletion (temporary). Enable by changing debug_delete to 1 and changing email_to_delete to email to be deleted
-debug_delete = 0
+debug_delete = 1
 if debug_delete:
     email_to_delete = "EMAIL_HERE"
-    DeleteUser(email_to_delete)
-    print(email_to_delete + " removed from SQL database")
+    if FindPass(email_to_delete) != "X_NOTFOUND_X":
+        DeleteUser(email_to_delete)
+        print("DELETION: " + email_to_delete + " removed from SQL database")
+    else:
+        print("DELETION: " + email_to_delete + " not found in SQL database")
 
 ######################################## Login and Resister ###########################################
 
@@ -75,10 +84,12 @@ def loginDemo():
     if request.method == "POST":
         email = request.form.get("email")
         passwrd = request.form.get("password")
-        print("Password found is: " + FindPass(email))
         if request.form.get("signin-btn") == "access" and passwrd == FindPass(email):
             session["user"] = FindName(email)
             return redirect(url_for("home"))
+        elif FindPass(email) == "X_NOTFOUND_X":
+            #DO SOMETHING HERE TO UPDATE SITE AND SAY ACCOUNT NOT FOUND
+            print("ERROR: User not found")
     else:
         if "user" in session:
             user = session["user"]
@@ -94,7 +105,10 @@ def signupDemo():
         email = request.form.get("signup-email")
         passwrd = request.form.get("signup-password")
         session["user"] = fname
-        AddUser(fname, lname, email, passwrd)
+        if FindPass(email) == "X_NOTFOUND_X":
+            AddUser(fname, lname, email, passwrd)
+        else:
+            print("ERROR: User already exists")
         return redirect(url_for("home"))
 
     else:
