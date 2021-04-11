@@ -32,6 +32,10 @@
   </tbody>
 </table>
 -->
+
+
+
+<!--
 <p>Type in the number of components you wish to enter</p>
 <p>
   <input type="text" id="tb1" />
@@ -89,5 +93,102 @@
     document.getElementById('makeTButton').style.display = 'none';
 }
 </script>
+-->
+<p>Populate the table</p>
+
+<form name="myform" id="myform">
+  <table id="table">
+
+      <button type="button" id="addRow">Add Row</button>
+      &nbsp;
+      <button type="button" id="addCol">Add column</button>
+      </br></br>
+
+      <tr id="one">
+          <td>Component Name</td>
+          <td>State 1</td>
+      </tr>
+      <tr id="two">
+          <td>
+              <input type="text" name="Component name" />
+          </td>
+          <td>
+              <input type="text" name="State1" />
+          </td>
+      
+      </tr>
+  </table>
+  </br></br>
+</form>
+
+
+<form name="myform" id="myform1">
+  <table id="table1">
+
+      <button type="button" id="addRow1">Add Row</button>
+      </br></br>
+
+      <tr id="one1">
+          <td>Component Name</td>
+          <td>Property</td>
+          <td>Minimum Value</td>
+          <td>Maximum Value</td>
+
+      </tr>
+      <tr id="two1">
+          <td>
+              <input type="text" name="Component Name" />
+          </td>
+          <td>
+              <input type="text" name="Property" />
+          </td>
+          <td>
+              <input type="text" name="Minimum Value" />
+          </td>
+          <td>
+              <input type="text" name="Maximum Value" />
+          </td>
+      </tr>
+  </table>
+  </br></br>
+  <input type="submit"></input>
+</form>
+
+
+
+<script>
+$(document).ready(function () {
+$('#addRow').click(function () {
+   var count = 1,
+       first_row = $('#two');
+   while (count-- > 0) first_row.clone().appendTo('#table');
+});
+
+var myform = $('#myform'),
+   iter = 2;
+$('#addCol').click(function () {
+   myform.find('tr').each(function(){
+     var trow = $(this);
+       if(trow.index() === 0){
+           trow.append('<td>State '+iter+'</td>');
+       }else{
+           trow.append('<td><input type="text" name="cb'+iter+'"/></td>');
+       }
+      
+   });
+   iter += 1;
+});
+});
+
+$(document).ready(function () {
+$('#addRow1').click(function () {
+   var count = 1,
+       first_row = $('#two1');
+   while (count-- > 0) first_row.clone().appendTo('#table1');
+});
+});
+    
+</script>
+
 
 {% endblock %}
