@@ -14,26 +14,6 @@
 </style>
 {% block pageTitle %}Add New System{% endblock %}
 {% block content %}
-<!-- <table id="table1" class="display" style="width:100%">
-  <thead>
-    <tr>
-      <th>Component Name</th>
-      <th>State1</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><input type="text" id="row-name" name="row-name" placeholder="Enter Component Name"></td>
-      <td><input type="text" id="row-state" name="row-state" placeholder="Enter Component State"></td>
-      <td><input type="text" id="row-property" name="row-property" placeholder="Enter Property"></td>
-      <td><input type="text" id="row-min" name="row-min" placeholder="Enter Acceptable Min"></td>
-      <td><input type="text" id="row-max" name="row-max" placeholder="Enter Acceptable Max"></td>
-    </tr>
-  </tbody>
-</table>
--->
-
-
 
 <!--
 <p>Type in the number of components you wish to enter</p>
@@ -94,7 +74,7 @@
 }
 </script>
 -->
-<p>Populate the table</p>
+<p>Populate the tables</p>
 
 <form name="myform" id="myform">
   <table id="table">
@@ -102,7 +82,7 @@
       <button type="button" id="addRow">Add Row</button>
       &nbsp;
       <button type="button" id="addCol">Add column</button>
-      </br></br>
+      <br></br>
 
       <tr id="one">
           <td>Component Name</td>
@@ -115,27 +95,26 @@
           <td>
               <input type="text" name="State1" />
           </td>
-      
+
       </tr>
   </table>
-  </br></br>
+  <br></br>
 </form>
 
+<form name="myform" id="myform2">
+  <table id="table2">
 
-<form name="myform" id="myform1">
-  <table id="table1">
+      <button type="button" id="addRow2">Add Row</button>
+      <br></br>
 
-      <button type="button" id="addRow1">Add Row</button>
-      </br></br>
-
-      <tr id="one1">
+      <tr id="one2">
           <td>Component Name</td>
           <td>Property</td>
           <td>Minimum Value</td>
           <td>Maximum Value</td>
 
       </tr>
-      <tr id="two1">
+      <tr id="two2">
           <td>
               <input type="text" name="Component Name" />
           </td>
@@ -150,10 +129,66 @@
           </td>
       </tr>
   </table>
-  </br></br>
+  <br></br>
+</form>
+
+<form name="myform1" id="myform1">
+  <table id="table1">
+      <button type="button" id="addRow1">Add Row</button>
+      &nbsp;
+      <button type="button" id="addCol1">Add column</button>
+      <br></br>
+
+      <tr id="one1">
+          <td>Envi. Entity Name</td>
+          <td>State 1</td>
+      </tr>
+      <tr id="two1">
+          <td>
+              <input type="text" name="Envi Entity Name" />
+          </td>
+          <td>
+              <input type="text" name="State1" />
+          </td>
+
+      </tr>
+  </table>
+  <br></br>
+</form>
+
+<form name="myform" id="myform3">
+  <table id="table3">
+
+      <button type="button" id="addRow3">Add Row</button>
+      <br></br>
+
+      <tr id="one3">
+          <td>Envi. Entity Name</td>
+          <td>Property</td>
+          <td>Minimum Value</td>
+          <td>Maximum Value</td>
+
+      </tr>
+      <tr id="two3">
+          <td>
+              <input type="text" name="Envi Entity Name" />
+          </td>
+          <td>
+              <input type="text" name="Property" />
+          </td>
+          <td>
+              <input type="text" name="Minimum Value" />
+          </td>
+          <td>
+              <input type="text" name="Maximum Value" />
+          </td>
+      </tr>
+  </table>
+  <br></br>
   <input type="submit"></input>
 </form>
 
+<a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
 
 
 <script>
@@ -174,7 +209,7 @@ $('#addCol').click(function () {
        }else{
            trow.append('<td><input type="text" name="cb'+iter+'"/></td>');
        }
-      
+
    });
    iter += 1;
 });
@@ -186,8 +221,48 @@ $('#addRow1').click(function () {
        first_row = $('#two1');
    while (count-- > 0) first_row.clone().appendTo('#table1');
 });
+
+var myform = $('#myform1'),
+   iter = 2;
+$('#addCol1').click(function () {
+   myform.find('tr').each(function(){
+     var trow = $(this);
+       if(trow.index() === 0){
+           trow.append('<td>State '+iter+'</td>');
+       }else{
+           trow.append('<td><input type="text" name="cee'+iter+'"/></td>');
+       }
+
+   });
+   iter += 1;
 });
-    
+});
+
+/*
+function deleteRows() {
+  document.getElementById("table").deleteRow(-1);
+}
+
+function deleteRows() {
+  document.getElementById("table1").deleteRow(-1);
+}
+*/
+
+$(document).ready(function () {
+$('#addRow2').click(function () {
+   var count = 1,
+       first_row = $('#two2');
+   while (count-- > 0) first_row.clone().appendTo('#table2');
+});
+});
+
+$(document).ready(function () {
+$('#addRow3').click(function () {
+   var count = 1,
+       first_row = $('#two3');
+   while (count-- > 0) first_row.clone().appendTo('#table3');
+});
+});
 </script>
 
 
