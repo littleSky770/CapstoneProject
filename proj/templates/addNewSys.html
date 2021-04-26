@@ -14,68 +14,10 @@
 </style>
 {% block pageTitle %}Add New System{% endblock %}
 {% block content %}
-
-<!--
-<p>Type in the number of components you wish to enter</p>
-<p>
-  <input type="text" id="tb1" />
-  <button type="button" id="makeTButton" onclick='createTable()'>Make Table</button>
-</p>
-
-<table id="table" class="order-table table" name="table1" required>
-</table>
-
-<p><button onclick="createRows()">+</button> Rows <button onclick="deleteRows()">-</button></p>
-<p><button type="submit">Submit form</button></p>
-<a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
-
-<script>
-  var num = 0;
-  function createTable() {
-    var a;
-    a = document.getElementById('tb1').value;
-    num += a;
-    if (a == "") {
-      alert("Please enter some numeric value");
-    } else {
-      var rows = "<th>Component</th><th>State1</th>";
-      for (var i = 0; i < a; i++) {
-        rows += "<tr><td><input type='text' name='" + "component".concat(i+1) + "'></td><td><input type='text' name='" + "state1".concat(i+1) + "'></td></tr>";
-      }
-      var table = document.createElement('table');
-      table.innerHTML = rows;
-      document.getElementById("table").appendChild(table.firstChild);
-    }
-  }
-/* NOT working right now because it wont get along with the create table function :(
-  function createRows() {
-    var table = document.getElementById("table");
-    var row = table.insertRow(-1);
-    for (var i = 0; i < num; i++)
-    {
-      var cells = row.insertCell(i);
-      cells += "<tr><td><input type='text' name='" + "component".concat(i+1) + "'></td><td><input type='text' name='" + "state1".concat(i+1) + "'></td></tr>";";
-    }
-    table.innerHTML = cells;
-    document.getElementById("table").appendChild(table.firstChild);
-  }
-*/
-  function deleteRows() {
-    document.getElementById("table").deleteRow(-1);
-  }
-
-  //this makes the create table button disappear after a number is entered
-  var button = document.getElementById('makeTButton')
-  button.addEventListener('click',hideshow,false);
-
-  function hideshow() {
-    document.getElementById('tb1').style.display = 'none';
-    document.getElementById('makeTButton').style.display = 'none';
-}
-</script>
--->
 <p>Populate the tables</p>
 
+<!-- first form for component-->
+<!-- this one has dynamtic number of columns and rows-->
 <form name="myform" id="myform">
   <table id="table">
 
@@ -101,6 +43,8 @@
   <br></br>
 </form>
 
+<!-- Second form for component-->
+<!-- this one has static number of columns but the user can add rows-->
 <form name="myform" id="myform2">
   <table id="table2">
 
@@ -132,6 +76,8 @@
   <br></br>
 </form>
 
+<!-- first form for environmental Entity-->
+<!-- this one has dynamtic number of columns and rows-->
 <form name="myform1" id="myform1">
   <table id="table1">
       <button type="button" id="addRow1">Add Row</button>
@@ -156,6 +102,8 @@
   <br></br>
 </form>
 
+<!-- second form for environmental Entity-->
+<!-- this one has static number of columns but the user can add rows-->
 <form name="myform" id="myform3">
   <table id="table3">
 
@@ -188,10 +136,13 @@
   <input type="submit"></input>
 </form>
 
+<!--go back to the Safety Related data page-->
 <a href="/safetyRelatedData"><button class="regular" type="button">Previous</button></a>
-
+<!-- There should be a next button that leads to the autofilled tables with
+combonations of the info that the user put in these tables -->
 
 <script>
+//for the first table for component
 $(document).ready(function () {
 $('#addRow').click(function () {
    var count = 1,
@@ -215,12 +166,15 @@ $('#addCol').click(function () {
 });
 });
 
+//first table for EE
 $(document).ready(function () {
 $('#addRow1').click(function () {
    var count = 1,
        first_row = $('#two1');
    while (count-- > 0) first_row.clone().appendTo('#table1');
 });
+
+
 
 var myform = $('#myform1'),
    iter = 2;
@@ -238,7 +192,7 @@ $('#addCol1').click(function () {
 });
 });
 
-/*
+/* these doesnt work because they would delete all of the new rows
 function deleteRows() {
   document.getElementById("table").deleteRow(-1);
 }
@@ -248,6 +202,7 @@ function deleteRows() {
 }
 */
 
+//second component table
 $(document).ready(function () {
 $('#addRow2').click(function () {
    var count = 1,
@@ -256,6 +211,7 @@ $('#addRow2').click(function () {
 });
 });
 
+//second EE table
 $(document).ready(function () {
 $('#addRow3').click(function () {
    var count = 1,

@@ -63,8 +63,7 @@ def DeleteUser(email_form):
         cur.execute("DELETE FROM Users WHERE email =?", (email_form,))
         con.commit()
 
-#hardcoded for now
-#name will be stored by the session and passed to the pages
+#hardcoded for guests
 guest = 'Guest'
 
 #For debugging and admin deletion (temporary). Enable by changing debug_delete to 1 and changing email_to_delete to email to be deleted
@@ -222,6 +221,15 @@ def addNewSys():
 
     else:
         return render_template('addNewSys.html', usr = guest)
+
+@app.route("/safetyAnalysisTool/addNewSys/2/")
+def addNewSys2():
+    if "user" in session:
+        user = session["user"]
+        return render_template('addNewSys2.html', usr = user)
+
+    else:
+        return render_template('addNewSys2.html', usr = guest)
 
 @app.route("/safetyAnalysisTool/loadFromDB/")
 def loadFromDB():
